@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  react-slider:
+    build: .
+    ports:
+      - "3000:80"
+    container_name: react-slider-app
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+  # Development service (optional)
+  react-slider-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    container_name: react-slider-dev
+    volumes:
+      - ./src:/app/src:ro
+      - ./public:/app/public:ro
+      - ./index.html:/app/index.html:ro
+      - ./package.json:/app/package.json:ro
+      - ./vite.config.ts:/app/vite.config.ts:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+      - ./tsconfig.app.json:/app/tsconfig.app.json:ro
+      - ./eslint.config.js:/app/eslint.config.js:ro
+    environment:
+      - NODE_ENV=development
+    profiles:
+      - dev

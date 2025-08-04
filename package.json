@@ -7,11 +7,21 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docker:build": "docker build -t react-slider .",
+    "docker:run": "docker run -p 3000:80 react-slider",
+    "docker:build-dev": "docker build -f Dockerfile.dev -t react-slider-dev .",
+    "docker:run-dev": "docker run -p 5173:5173 -v ./src:/app/src react-slider-dev",
+    "docker:compose": "docker-compose up",
+    "docker:compose-dev": "docker-compose --profile dev up react-slider-dev",
+    "docker:compose-build": "docker-compose up --build",
+    "docker:compose-down": "docker-compose down"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.11",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
